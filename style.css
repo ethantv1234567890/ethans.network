@@ -13,6 +13,21 @@
       color: #e0e0e0;
     }
 
+    body.midnight {
+      background: linear-gradient(#001133, #000);
+      color: #89cff0;
+    }
+
+    body.sunset {
+      background: linear-gradient(#ffcc33, #ff5500);
+      color: #fff0e0;
+    }
+
+    body.matrix {
+      background: #000;
+      color: #00ff00;
+    }
+
     /* Scanline overlay */
     body::before {
       content: "";
@@ -34,6 +49,36 @@
         to bottom,
         rgba(160, 32, 240, 0.05),
         rgba(160, 32, 240, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+    }
+
+    body.midnight::before {
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 51, 102, 0.05),
+        rgba(0, 51, 102, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+    }
+
+    body.sunset::before {
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 85, 0, 0.05),
+        rgba(255, 85, 0, 0.05) 1px,
+        transparent 1px,
+        transparent 2px
+      );
+    }
+
+    body.matrix::before {
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(0, 255, 0, 0.05),
+        rgba(0, 255, 0, 0.05) 1px,
         transparent 1px,
         transparent 2px
       );
@@ -61,6 +106,34 @@
       transition: transform 0.5s, box-shadow 0.5s;
       z-index: 1001;
     }
+
+    #theme-menu {
+      position: fixed;
+      top: 70px;
+      right: 20px;
+      display: none;
+      flex-direction: column;
+      gap: 10px;
+      z-index: 1000;
+    }
+
+    #theme-menu.show {
+      display: flex;
+    }
+
+    .theme-btn {
+      padding: 5px 10px;
+      border-radius: 5px;
+      border: none;
+      cursor: pointer;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .theme-btn.default { background: #00d4ff; color: #000; }
+    .theme-btn.blackhole { background: #a020f0; color: #fff; }
+    .theme-btn.midnight { background: #003366; color: #fff; }
+    .theme-btn.sunset { background: #ff4500; color: #fff; }
+    .theme-btn.matrix { background: #00aa00; color: #fff; }
 
     #theme-toggle:hover {
       transform: rotate(180deg) scale(1.1);
@@ -143,6 +216,27 @@
       box-shadow: 0 0 15px #a020f055, 0 0 30px #a020f033;
     }
 
+    body.midnight .links a {
+      border-color: #003366;
+      color: #89cff0;
+      background: rgba(0, 51, 102, 0.4);
+      box-shadow: 0 0 15px #00336655, 0 0 30px #00336633;
+    }
+
+    body.sunset .links a {
+      border-color: #ff4500;
+      color: #ff4500;
+      background: rgba(255, 85, 0, 0.2);
+      box-shadow: 0 0 15px #ff450055, 0 0 30px #ff450033;
+    }
+
+    body.matrix .links a {
+      border-color: #00aa00;
+      color: #00ff00;
+      background: rgba(0, 170, 0, 0.2);
+      box-shadow: 0 0 15px #00aa0055, 0 0 30px #00aa0033;
+    }
+
     .links a:hover {
       background: linear-gradient(45deg, #00d4ff, #ff00ff, #00ffae, #00d4ff);
       background-size: 400% 400%;
@@ -156,6 +250,24 @@
       background: linear-gradient(45deg, #a020f0, #ff1493, #8a2be2, #a020f0);
       box-shadow: 0 0 20px #a020f0, 0 0 50px #a020f099;
       color: #fff;
+    }
+
+    body.midnight .links a:hover {
+      background: linear-gradient(45deg, #003366, #005599, #001133, #003366);
+      box-shadow: 0 0 20px #003366, 0 0 50px #00336699;
+      color: #fff;
+    }
+
+    body.sunset .links a:hover {
+      background: linear-gradient(45deg, #ffcc33, #ff5500, #ff884d, #ffcc33);
+      box-shadow: 0 0 20px #ff4500, 0 0 50px #ff450099;
+      color: #000;
+    }
+
+    body.matrix .links a:hover {
+      background: linear-gradient(45deg, #009900, #00ff00, #006600, #009900);
+      box-shadow: 0 0 20px #00ff00, 0 0 50px #00ff0099;
+      color: #000;
     }
 
     @keyframes rainbow {

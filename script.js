@@ -62,16 +62,31 @@
     window.onload = function() {
       const tagline = document.getElementById('tagline');
       typeEffect(tagline, 75);
-      document.getElementById('theme-toggle').addEventListener('click', function() {
-        document.getElementById('theme-toggle').classList.toggle('active');
-        document.body.classList.toggle('blackhole');
-        if (document.body.classList.contains('blackhole')) {
-          starColor = '#a020f0';
-          glowColor = '#a020f0';
-        } else {
-          starColor = '#fff';
-          glowColor = '#00d4ff';
-        }
+      const themeToggle = document.getElementById('theme-toggle');
+      const themeMenu = document.getElementById('theme-menu');
+
+      const themeSettings = {
+        default: {class: '', star: '#fff', glow: '#00d4ff'},
+        blackhole: {class: 'blackhole', star: '#a020f0', glow: '#a020f0'},
+        midnight: {class: 'midnight', star: '#89cff0', glow: '#003366'},
+        sunset: {class: 'sunset', star: '#ffdd33', glow: '#ff4500'},
+        matrix: {class: 'matrix', star: '#00ff00', glow: '#00ff00'}
+      };
+
+      function applyTheme(name) {
+        document.body.className = themeSettings[name].class;
+        starColor = themeSettings[name].star;
+        glowColor = themeSettings[name].glow;
+        themeMenu.classList.remove('show');
+      }
+
+      themeToggle.addEventListener('click', function() {
+        themeToggle.classList.toggle('active');
+        themeMenu.classList.toggle('show');
+      });
+
+      document.querySelectorAll('.theme-btn').forEach(btn => {
+        btn.addEventListener('click', () => applyTheme(btn.dataset.theme));
       });
     }
 
