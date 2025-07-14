@@ -54,24 +54,10 @@
       );
     }
 
-    body.midnight::before {
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(0, 51, 102, 0.05),
-        rgba(0, 51, 102, 0.05) 1px,
-        transparent 1px,
-        transparent 2px
-      );
-    }
-
+    /* Disable scanlines for midnight and sunset themes */
+    body.midnight::before,
     body.sunset::before {
-      background: repeating-linear-gradient(
-        to bottom,
-        rgba(255, 85, 0, 0.05),
-        rgba(255, 85, 0, 0.05) 1px,
-        transparent 1px,
-        transparent 2px
-      );
+      background: none;
     }
 
     body.matrix::before {
@@ -111,14 +97,20 @@
       position: fixed;
       top: 70px;
       right: 20px;
-      display: none;
+      display: flex;
       flex-direction: column;
       gap: 10px;
       z-index: 1000;
+      opacity: 0;
+      transform: translateY(-10px) scale(0.9);
+      pointer-events: none;
+      transition: transform 0.3s, opacity 0.3s;
     }
 
     #theme-menu.show {
-      display: flex;
+      opacity: 1;
+      transform: translateY(0) scale(1);
+      pointer-events: auto;
     }
 
     .theme-btn {
@@ -158,9 +150,50 @@
       box-shadow: 0 0 15px #a020f0aa;
     }
 
+    body.midnight #theme-toggle {
+      background: #003366;
+      box-shadow: 0 0 15px #003366aa;
+    }
+
+    body.sunset #theme-toggle {
+      background: #ff4500;
+      box-shadow: 0 0 15px #ff4500aa;
+    }
+
+    body.matrix #theme-toggle {
+      background: #00aa00;
+      box-shadow: 0 0 15px #00aa00aa;
+    }
+
+    body.blackhole #theme-toggle .toggle-icon {
+      background: radial-gradient(circle at center, #fff, #a020f0);
+    }
+
+    body.midnight #theme-toggle .toggle-icon {
+      background: radial-gradient(circle at center, #89cff0, #003366);
+    }
+
+    body.sunset #theme-toggle .toggle-icon {
+      background: radial-gradient(circle at center, #ffdd33, #ff4500);
+    }
+
+    body.matrix #theme-toggle .toggle-icon {
+      background: radial-gradient(circle at center, #00ff00, #00aa00);
+    }
+
     @keyframes spin {
       from { transform: rotate(0deg); }
       to { transform: rotate(360deg); }
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.2); }
+      100% { transform: scale(1); }
+    }
+
+    #theme-toggle.changed {
+      animation: pop 0.4s;
     }
 
     .container {

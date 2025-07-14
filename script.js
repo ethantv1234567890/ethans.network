@@ -78,6 +78,9 @@
         starColor = themeSettings[name].star;
         glowColor = themeSettings[name].glow;
         themeMenu.classList.remove('show');
+        themeToggle.classList.remove('active');
+        themeToggle.classList.add('changed');
+        setTimeout(() => themeToggle.classList.remove('changed'), 400);
       }
 
       themeToggle.addEventListener('click', function() {
