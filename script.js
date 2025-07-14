@@ -3,6 +3,8 @@
     const ctx = c.getContext("2d");
     c.width = window.innerWidth;
     c.height = window.innerHeight;
+    let starColor = "#fff";
+    let glowColor = "#00d4ff";
     let stars = [];
     for (let i = 0; i < 200; i++) {
       stars.push({ x: Math.random() * c.width, y: Math.random() * c.height, r: Math.random() * 1.5 });
@@ -14,9 +16,9 @@
     });
     function draw() {
       ctx.clearRect(0, 0, c.width, c.height);
-      ctx.fillStyle = "#fff";
+      ctx.fillStyle = starColor;
       ctx.shadowBlur = 5;
-      ctx.shadowColor = "#00d4ff";
+      ctx.shadowColor = glowColor;
       for (let i = 0; i < stars.length; i++) {
         let s = stars[i];
         let dx = (mouse.x - c.width / 2) * 0.01;
@@ -60,6 +62,17 @@
     window.onload = function() {
       const tagline = document.getElementById('tagline');
       typeEffect(tagline, 75);
+      document.getElementById('theme-toggle').addEventListener('click', function() {
+        document.getElementById('theme-toggle').classList.toggle('active');
+        document.body.classList.toggle('blackhole');
+        if (document.body.classList.contains('blackhole')) {
+          starColor = '#a020f0';
+          glowColor = '#a020f0';
+        } else {
+          starColor = '#fff';
+          glowColor = '#00d4ff';
+        }
+      });
     }
 
     // Terminal logic
